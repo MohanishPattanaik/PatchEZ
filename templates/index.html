@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PatchEZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .glass {
+            background: rgba(46, 163, 144, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(79, 232, 207, 0.18);
+        }
+        .glass:hover {
+            background: rgba(46, 163, 144, 0.25);
+        }
+        .loading {
+            border: 4px solid rgba(46, 163, 144, 0.2);
+            border-radius: 50%;
+            border-top: 4px solid #2ea390;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        .input-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+input {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #ccc;
+}
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        body {
+            background: linear-gradient(135deg, #0b2a36 0%, #1e875b 100%);
+            min-height: 100vh;
+        }
+        .custom-gradient {
+            background: linear-gradient(90deg, #2ea390 0%, #4fe8cf 100%);
+        }
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(46, 163, 144, 0.95);
+                padding: 1rem;
+            }
+            .nav-links.active a {
+                padding: 0.5rem 0;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <nav class="glass text-white p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold flex items-center">
+                <i class="bi bi-activity mr-2"></i>
+                PatchEZ
+            </a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-[#4fe8cf] transition-colors">Dashboard</a>
+                <a href="About.html" onclick="loadPage('about')" class="hover:text-[#4fe8cf] transition-colors">About Us</a>
+                <a href="Blogs.html" onclick="loadPage('blogs')" class="hover:text-[#4fe8cf] transition-colors">Blogs</a>
+                <a href="Contacts.html" onclick="loadPage('contact')" class="hover:text-[#4fe8cf] transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden text-2xl" onclick="toggleMobileMenu()">
+                <i class="bi bi-list"></i>
+            </button>
+        </div>
+        <div id="mobileMenu" class="nav-links md:hidden">
+            <a href="#" class="block py-2">Dashboard</a>
+            <a href="#" onclick="loadPage('about')" class="block py-2">About Us</a>
+            <a href="#" onclick="loadPage('blogs')" class="block py-2">Blogs</a>
+            <a href="#" onclick="loadPage('contact')" class="block py-2">Contact</a>
+        </div>
+    </nav>
+
+    <div id="mainContent">
+        <main class="container mx-auto p-4 md:p-6">
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Left Column -->
+                <div class="glass rounded-xl p-4 md:p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-xl md:text-2xl font-bold text-white">Device Status</h2>
+                        <div class="text-white">
+                            <i class="bi bi-bluetooth text-xl md:text-2xl"></i>
+                            <span class="ml-2">Connected</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 md:space-y-6">
+                        <!-- Battery Status -->
+                        <div class="glass rounded-lg p-4">
+                            <h3 class="text-white font-semibold mb-2">Battery Status</h3>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div id="batteryLevel" class="custom-gradient h-3 rounded-full transition-all duration-500" style="width: 85%"></div>
+                            </div>
+                            <p class="text-sm text-white mt-1">85% Remaining</p>
+                        </div>
+
+                        <!-- Drug Reservoir -->
+                        <div class="glass rounded-lg p-4">
+                            <h3 class="text-white font-semibold mb-4">Drug Reservoir Status</h3>
+                            <div class="flex items-center justify-between">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-white">5.2</div>
+                                    <div class="text-sm text-white">mL Remaining</div>
+                                </div>
+                                <div class="flex-1 ml-4">
+                                    <div class="w-full bg-gray-200 rounded-full h-4">
+                                        <div class="custom-gradient h-4 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Daily Stats -->
+                        <div class="glass rounded-lg p-4">
+                            <h3 class="text-white font-semibold mb-4">Daily Statistics</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-white">3</div>
+                                    <div class="text-sm text-white">Doses Today</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-white">1.5</div>
+                                    <div class="text-sm text-white">mL Delivered</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>  
+
+
+
+                <!-- Right Column -->                           
+                <div class="glass rounded-xl p-4 md:p-6">
+                    <h2 class="text-xl md:text-2xl font-bold text-white mb-6">Patient Analytics</h2>
+                    <div class="space-y-4 md:space-y-6">
+                        <!-- Vital Signs -->
+                        <div class="glass rounded-lg p-4">
+                            <h3 class="text-white font-semibold mb-4">Vital Signs</h3>
+                            <div id="vitalsGrid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Schedule -->
+                        <div class="glass rounded-lg p-4">
+                            <h3 class="text-white font-semibold mb-4">Upcoming Doses</h3>
+                            <div id="schedule" class="space-y-2">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="flex space-x-4">
+                            <button onclick="emergencyStop()" class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition-colors">
+                                Emergency Stop
+                            </button>
+                            <button onclick="adjustDose()" class="flex-1 glass hover:bg-[#2ea390] text-white py-2 px-4 rounded-lg transition-colors">
+                                Adjust Dose
+                            </button>
+                        </div>           
+                    </div>
+                </div>
+
+
+                <!-- New Grid Below Left Column -->
+                <div class="glass rounded-xl p-4 md:p-6">
+                    <div class="space-y-4 md:space-y-6">
+                        <h2 class="text-xl md:text-2xl font-bold text-white mb-6">Predict Stress Level</h2>
+                        <!-- Embedded ML Model Section -->
+                        <div class="glass rounded-lg p-4 mt-4">
+                            
+
+                            <form action="/predict" method="post" id="stressForm">
+                                <div class="input-container">
+                                    <input type="number" step="0.01" name="heart_rate" placeholder="Heart Rate (bpm)" required>
+                                    <input type="number" step="0.01" name="respiration_rate" placeholder="Respiration Rate" required>
+                                    <input type="number" step="0.01" name="snoring_range" placeholder="Snoring Range" required>
+                                    <input type="number" step="0.01" name="body_temperature" placeholder="Body Temperature" required>
+                                    <input type="number" step="0.01" name="limb_movement" placeholder="Limb Movement" required>
+                                    <input type="number" step="0.01" name="eye_movement" placeholder="Eye Movement" required>
+                                    <input type="number" step="0.01" name="hours_of_sleep" placeholder="Hours of Sleep" required>
+                                    <input type="number" step="0.01" name="blood_oxygen" placeholder="Blood Oxygen Level (%)" required>
+                                </div>
+                                <button type="submit" class="glass hover:bg-[#2ea390] text-white py-2 px-4 rounded-lg transition-colors mt-6">Predict Stress Level</button>
+                            </form>
+    
+                            <h3 class="text-white mt-6">⚡ Predicted Stress Level:</h3>
+                            <pre id="result" class="text-lg text-green-400"></pre>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize MongoDB connection
+        const userId = localStorage.getItem('userId') || `user_${Math.random().toString(36).substr(2, 9)}`;
+        localStorage.setItem('userId', userId);
+        const appSlug = 'omnihealth-device-789012';
+
+        // MongoDB Operations
+        async function savePatientData(data) {
+            try {
+                const response = await fetch('https://r0c8kgwocscg8gsokogwwsw4.zetaverse.one/mongodb', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Bearer iYLdiNb3s7R86PBk9Z8rNDICYz23',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        appSlug,
+                        action: 'create',
+                        collection: 'patient_data',
+                        data
+                    })
+                });
+                return await response.json();
+            } catch (error) {
+                console.error('Error saving patient data:', error);
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Update vital signs with real-time simulation
+        function updateVitals() {
+            const vitalsGrid = document.getElementById('vitalsGrid');
+            if (!vitalsGrid) return;
+
+            const vitals = [
+                { name: 'Heart Rate', value: Math.floor(70 + Math.random() * 10), unit: 'bpm' },
+                { name: 'Blood Pressure', value: `${120 + Math.floor(Math.random() * 5)}/${80 + Math.floor(Math.random() * 5)}`, unit: 'mmHg' },
+                { name: 'Temperature', value: (98.6 + Math.random() * 0.4).toFixed(1), unit: '°F' },
+                { name: 'SpO2', value: Math.floor(97 + Math.random() * 2), unit: '%' },
+                { name: 'Glucose', value: Math.floor(95 + Math.random() * 10), unit: 'mg/dL' },
+                { name: 'Activity', value: Math.floor(2000 + Math.random() * 1000), unit: 'steps' }
+            ];
+
+            vitalsGrid.innerHTML = vitals.map(vital => `
+                <div class="text-center glass p-3 rounded-lg">
+                    <div class="text-sm text-white opacity-75">${vital.name}</div>
+                    <div class="text-xl font-bold text-white">${vital.value}</div>
+                    <div class="text-xs text-white opacity-75">${vital.unit}</div>
+                </div>
+            `).join('');
+
+            // Save to MongoDB
+            savePatientData({
+                timestamp: new Date(),
+                vitals: vitals.reduce((acc, v) => ({...acc, [v.name]: v.value}), {})
+            });
+        }
+
+        // Emergency Stop Function
+        function emergencyStop() {
+            alert('Emergency Stop Activated! Medical staff has been notified.');
+            // Additional emergency protocols would go here
+        }
+
+        // Dose Adjustment Function
+        function adjustDose() {
+            const newDose = prompt('Enter new dose amount (in mL):');
+            if (newDose && !isNaN(newDose)) {
+                alert(`Dose adjusted to ${newDose}mL. Pending medical approval.`);
+                // Additional dose adjustment logic would go here
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            updateVitals();
+            setInterval(updateVitals, 5000);
+        });
+
+        // Update schedule
+        function updateSchedule() {
+            const schedule = document.getElementById('schedule');
+            if (!schedule) return;
+
+            const now = new Date();
+            const scheduleItems = Array.from({length: 3}, (_, i) => {
+                const time = new Date(now.getTime() + (i + 1) * 3600000);
+                return {
+                    time: time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                    dose: '0.5mL'
+                };
+            });
+
+            schedule.innerHTML = scheduleItems.map(item => `
+                <div class="flex justify-between items-center glass p-2 rounded-lg">
+                    <span class="text-white">${item.time}</span>
+                    <span class="text-white">${item.dose}</span>
+                </div>
+            `).join('');
+        }
+
+        updateSchedule();
+        setInterval(updateSchedule, 60000);
+    </script>
+    <script>
+        const form = document.querySelector('#stressForm');
+        const resultElement = document.getElementById('result');
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            resultElement.innerText = `🔥 Stress Level: ${data.stress_level}`;
+        });
+    </script>
+</body>
+</html>
