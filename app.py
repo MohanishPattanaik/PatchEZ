@@ -42,3 +42,11 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
+
+ git init
+>> git add .
+>> git commit -m "Initial Commit"
+>> git branch -M main
+>> git remote add origin https://github.com/<MohanishPattanaik>/PatchEZ.git
+>> git push -u origin main
