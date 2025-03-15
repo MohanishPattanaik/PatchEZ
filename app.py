@@ -71,6 +71,3 @@ if __name__ == '__main__':
     
 
 
-
-git add . git commit -m "Added all files for Flask Stress Detection Project" && git push origin main
-
