@@ -27,7 +27,7 @@ def blogs():
 
 @app.route('/contact')
 def contact():
-    return render_template('Contacts.html')
+    return render_template('contacts.html')
 
 @app.route('/styles')
 def styles():
