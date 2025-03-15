@@ -10,6 +10,11 @@ scaler = joblib.load("scaler.pkl")
 app = Flask(__name__, template_folder='templates')
 
 # Route to render the HTML page and css file
+
+@app.route('/')
+def home():
+    return "PatchEZ Flask App is Live 🚀"
+
 @app.route('/index')
 def index():
     return render_template('index.html')
@@ -67,10 +72,3 @@ def predict():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
-
-    
-
-
-
-git add . git commit -m "Added all files for Flask Stress Detection Project" && git push origin main
-
