@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PatchEZ Blogs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body style="background: linear-gradient(135deg, #0b2a36 0%, #1e875b 100%); min-height: 100vh; color: white; font-family: 'Poppins', sans-serif;">
+
+  <!-- Navbar -->
+  <nav style="background: rgba(46, 163, 144, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(79, 232, 207, 0.18);" class="text-white p-4 sticky top-0 z-50 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/templates/index.html" class="text-2xl font-bold flex items-center">
+        <i class="bi bi-activity mr-2"></i>
+        PatchEZ
+      </a>
+      <div class="hidden md:flex space-x-6">               
+        <a href="/index" class="hover:text-[#4fe8cf] transition-colors">Dashboard</a>
+        <a href='/about' onclick="loadPage('about')" class="hover:text-[#4fe8cf] transition-colors">About Us</a>
+        <a href='/blogs' onclick="loadPage('blogs')" class="hover:text-[#4fe8cf] transition-colors">Blogs</a>
+        <a href='/contact' onclick="loadPage('contact')" class="hover:text-[#4fe8cf] transition-colors">Contact</a>
+    </div>
+    </div>
+  </nav>
+
+  <!-- Main Blog Content -->
+  <div id="mainContent">
+    <main class="container mx-auto p-8">
+
+      <!-- Blog Heading -->
+      <h1 class="text-4xl font-bold mb-8 text-center text-[#4fe8cf]">	<i class="bi bi-heart-pulse mr-3 text-[#4fe8cf]"></i>Explore PatchEZ</h1>
+
+      <!-- Blog Card 1 -->
+      <div style="background: rgba(46, 163, 144, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(79, 232, 207, 0.18);" class="glass rounded-xl p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="bi bi-lightbulb-fill mr-2 text-[#4fe8cf]"></i> Understanding Stress Detection with AI</h2>
+        <p class="opacity-80 text-lg leading-relaxed">Explore how PatchEZ leverages machine learning models to analyze real-time vitals and accurately predict stress levels.</p>
+        <a href="https://ieeexplore.ieee.org/document/9445082" target="_blank" class="text-[#4fe8cf] hover:underline mt-4 block">Read More →</a>
+      </div>
+
+      <!-- Blog Card 2 -->
+      <div style="background: rgba(46, 163, 144, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(79, 232, 207, 0.18);" class="glass rounded-xl p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="bi bi-droplet-half mr-2 text-[#4fe8cf]"></i> Iontophoresis: Revolutionizing Drug Delivery</h2>
+        <p class="opacity-80 text-lg leading-relaxed">Deep dive into how PatchEZ uses Iontophoresis to release drugs accurately based on stress level predictions from our ML model.</p>
+        <a href="https://www.nature.com/articles/s41467-023-35990-7" target="_blank" class="text-[#4fe8cf] hover:underline mt-4 block">Read More →</a>
+      </div>
+
+      <!-- Blog Card 3 -->
+      <div style="background: rgba(46, 163, 144, 0.15); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(79, 232, 207, 0.18);" class="glass rounded-xl p-6 mb-8">
+        <h2 class="text-2xl font-bold mb-4"><i class="bi bi-broadcast-pin mr-2 text-[#4fe8cf]"></i> Real-time Patient Monitoring with IoT</h2>
+        <p class="opacity-80 text-lg leading-relaxed">Discover how PatchEZ leverages IoT modules to monitor patient vitals and send stress data to the cloud for analysis.</p>
+        <a href="https://ieeexplore.ieee.org/document/9068699" target="_blank" class="text-[#4fe8cf] hover:underline mt-4 block">Read More →</a>
+      </div>
+
+    </main>
+  </div>
+
+</body>
+
+</html>

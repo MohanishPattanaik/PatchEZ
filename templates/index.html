@@ -6,100 +6,32 @@
     <title>PatchEZ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        .glass {
-            background: rgba(46, 163, 144, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(79, 232, 207, 0.18);
-        }
-        .glass:hover {
-            background: rgba(46, 163, 144, 0.25);
-        }
-        .loading {
-            border: 4px solid rgba(46, 163, 144, 0.2);
-            border-radius: 50%;
-            border-top: 4px solid #2ea390;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-        .input-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-}
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
-input {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    padding: 10px 15px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 14px;
-}
-
-input::placeholder {
-    color: #ccc;
-}
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        body {
-            background: linear-gradient(135deg, #0b2a36 0%, #1e875b 100%);
-            min-height: 100vh;
-        }
-        .custom-gradient {
-            background: linear-gradient(90deg, #2ea390 0%, #4fe8cf 100%);
-        }
-        /* Mobile Optimizations */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(46, 163, 144, 0.95);
-                padding: 1rem;
-            }
-            .nav-links.active a {
-                padding: 0.5rem 0;
-            }
-        }
-
-    </style>
+  
 </head>
 <body>
     <nav class="glass text-white p-4 sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold flex items-center">
+            <a href="/index" class="text-2xl font-bold flex items-center">
                 <i class="bi bi-activity mr-2"></i>
                 PatchEZ
             </a>
-            <div class="hidden md:flex space-x-6">
+            <div class="hidden md:flex space-x-6">               
                 <a href="#" class="hover:text-[#4fe8cf] transition-colors">Dashboard</a>
-                <a href="About.html" onclick="loadPage('about')" class="hover:text-[#4fe8cf] transition-colors">About Us</a>
-                <a href="Blogs.html" onclick="loadPage('blogs')" class="hover:text-[#4fe8cf] transition-colors">Blogs</a>
-                <a href="Contacts.html" onclick="loadPage('contact')" class="hover:text-[#4fe8cf] transition-colors">Contact</a>
+                <a href='/about' onclick="loadPage('about')" class="hover:text-[#4fe8cf] transition-colors">About Us</a>
+                <a href='/blogs' onclick="loadPage('blogs')" class="hover:text-[#4fe8cf] transition-colors">Blogs</a>
+                <a href='/contact' onclick="loadPage('contact')" class="hover:text-[#4fe8cf] transition-colors">Contact</a>
             </div>
             <button class="md:hidden text-2xl" onclick="toggleMobileMenu()">
                 <i class="bi bi-list"></i>
             </button>
         </div>
         <div id="mobileMenu" class="nav-links md:hidden">
-            <a href="#" class="block py-2">Dashboard</a>
-            <a href="#" onclick="loadPage('about')" class="block py-2">About Us</a>
-            <a href="#" onclick="loadPage('blogs')" class="block py-2">Blogs</a>
-            <a href="#" onclick="loadPage('contact')" class="block py-2">Contact</a>
+            <a href="/index" class="block py-2">Dashboard</a>
+            <a href="/about" onclick="loadPage('about')" class="block py-2">About Us</a>
+            <a href="/blogs" onclick="loadPage('blogs')" class="block py-2">Blogs</a>
+            <a href="/contact" onclick="loadPage('contact')" class="block py-2">Contact</a>
         </div>
     </nav>
 
@@ -168,7 +100,7 @@ input::placeholder {
                         <!-- Vital Signs -->
                         <div class="glass rounded-lg p-4">
                             <h3 class="text-white font-semibold mb-4">Vital Signs</h3>
-                            <div id="vitalsGrid" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <div id="vitalsGrid" class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <!-- Populated by JS -->
                             </div>
                         </div>
@@ -227,10 +159,14 @@ input::placeholder {
     </div>
 
     <script>
+        //navbar redirection 
+        function loadPage(page) {
+    window.location.href = `/${page}`;
+}
         // Initialize MongoDB connection
         const userId = localStorage.getItem('userId') || `user_${Math.random().toString(36).substr(2, 9)}`;
         localStorage.setItem('userId', userId);
-        const appSlug = 'omnihealth-device-789012';
+        const appSlug = 'patchez-device-789012';
 
         // MongoDB Operations
         async function savePatientData(data) {
@@ -267,12 +203,16 @@ input::placeholder {
 
             const vitals = [
                 { name: 'Heart Rate', value: Math.floor(70 + Math.random() * 10), unit: 'bpm' },
-                { name: 'Blood Pressure', value: `${120 + Math.floor(Math.random() * 5)}/${80 + Math.floor(Math.random() * 5)}`, unit: 'mmHg' },
+                { name: 'Respiration Rate', value: Math.floor(16 + Math.random() * 8), unit: 'breaths/minute' },
+                { name: 'Snoring Range', value: Math.floor(10 + Math.random() * 40), unit: 'dB' },
                 { name: 'Temperature', value: (98.6 + Math.random() * 0.4).toFixed(1), unit: '°F' },
-                { name: 'SpO2', value: Math.floor(97 + Math.random() * 2), unit: '%' },
-                { name: 'Glucose', value: Math.floor(95 + Math.random() * 10), unit: 'mg/dL' },
-                { name: 'Activity', value: Math.floor(2000 + Math.random() * 1000), unit: 'steps' }
+                { name: 'Limb Movement', value: Math.floor(10 + Math.random() * 20), unit: 'actigraphy units' },
+                { name: 'Eye Movement', value: Math.floor(60 + Math.random() * 40), unit: 'EOG units' },
+                { name: 'Sleep Hours', value: (4 + Math.random() * 4).toFixed(1), unit: 'hours' },
+                { name: 'SpO2', value: Math.floor(97 + Math.random() * 2), unit: '%' }
             ];
+
+            
 
             vitalsGrid.innerHTML = vitals.map(vital => `
                 <div class="text-center glass p-3 rounded-lg">
@@ -281,6 +221,17 @@ input::placeholder {
                     <div class="text-xs text-white opacity-75">${vital.unit}</div>
                 </div>
             `).join('');
+
+            // Clear any existing intervals before setting a new one
+            clearInterval(intervalId);
+            location.reload(true); 
+
+
+            // Run updateVitals() every 30 seconds (30000 ms)
+            intervalId = setInterval(updateVitals, 30000);
+
+            // Run it once when the page loads
+            updateVitals();
 
             // Save to MongoDB
             savePatientData({
@@ -303,6 +254,7 @@ input::placeholder {
                 // Additional dose adjustment logic would go here
             }
         }
+        
 
         // Initialize
         window.addEventListener('load', () => {

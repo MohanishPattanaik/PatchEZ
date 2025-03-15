@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - PatchEZ</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .glass {
+      background: rgba(46, 163, 144, 0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(79, 232, 207, 0.18);
+    }
+  </style>
+</head>
+
+<body style="background: linear-gradient(135deg, #0b2a36 0%, #1e875b 100%); min-height: 100vh; color: white; font-family: 'Poppins', sans-serif;">
+
+  <!-- Navbar -->
+  <nav class="glass text-white p-4 sticky top-0 z-50 shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold flex items-center">
+        <i class="bi bi-activity mr-2"></i>
+        PatchEZ
+      </a>
+      <div class="hidden md:flex space-x-6">               
+        <a href="/index" class="hover:text-[#4fe8cf] transition-colors">Dashboard</a>
+        <a href='/about' onclick="loadPage('about')" class="hover:text-[#4fe8cf] transition-colors">About Us</a>
+        <a href='/blogs' onclick="loadPage('blogs')" class="hover:text-[#4fe8cf] transition-colors">Blogs</a>
+        <a href='/contact' onclick="loadPage('contact')" class="hover:text-[#4fe8cf] transition-colors">Contact</a>
+    </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div id="mainContent">
+    <main class="container mx-auto p-8">
+
+      <div class="grid md:grid-cols-1 gap-8">
+
+        <!-- (Vision & Mission) -->
+        <div class="glass rounded-xl p-6">
+          <h1 class="text-3xl font-bold mb-6"><i class="bi bi-lightbulb-fill mr-2 text-[#4fe8cf]"></i></i> Our Vision & Mission </h1>
+          <p class="opacity-80 text-lg leading-relaxed">At <b>PatchEZ</b>, our vision is to bridge the gap between AI and Healthcare,
+            by integrating machine learning models with advanced Iontophoresis-based wearable technology,
+            enabling real-time stress detection and personalized drug delivery to enhance patient safety and mental well-being.
+          </p>
+        </div>
+
+        <!-- section (Goal) -->
+        <div class="glass rounded-xl p-6">
+          <h1 class="text-3xl font-bold mb-6"><i class="bi bi-bullseye mr-2 text-[#4fe8cf]"></i> Goal</h1>
+          <p class="opacity-80
+          text-lg leading-relaxed mt-4">We aim to revolutionize the Indian healthcare system by building an affordable and scalable solution that monitors patients' mental and physical health 24/7, and provides instant, accurate drug release based on real-time stress levels, thereby reducing dependency on heavy medications like antidepressants and painkillers.
+          </p>
+        </div>
+
+        <!-- Section (Why PatchEZ) -->
+        <div class="glass rounded-xl p-6">
+          <h2 class="text-3xl font-bold mb-6"><i class="bi bi-shield-check mr-2 text-[#4fe8cf]"></i> Why PatchEZ? </i></h2>
+          <ul class="space-y-4">
+            <li><i class="bi bi-graph-up mr-2 text-[#4fe8cf]"></i> Real-time Stress Level Detection with ML Model</li>
+            <li><i class="bi bi-droplet-half mr-2 text-[#4fe8cf]"></i> Smart Drug Release using Iontophoresis Technology</li>
+            <li><i class="bi bi-cloud-upload mr-2 text-[#4fe8cf]"></i> Cloud-Based Patient Monitoring with IoT</li>
+            <li><i class="bi bi-shield-check mr-2 text-[#4fe8cf]"></i> Secured Data Handling </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Grid for Team Section -->
+      <div class="grid md:grid-cols-1 gap-8 mt-10">
+
+        <!-- Section (Our Team) -->
+        <div class="glass rounded-xl p-6">
+          <h2 class="text-3xl font-bold mb-6"><i class="bi bi-person-circle mr-2 text-[#4fe8cf]"></i> Meet Our Team</h2>
+          <ul class="space-y-4">
+            
+          </ul>
+        </div>
+
+        
+        
+      </div>
+
+    </main>
+  </div>
+
+</body>
+
+</html>

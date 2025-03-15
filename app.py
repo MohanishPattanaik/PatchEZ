@@ -9,10 +9,33 @@ scaler = joblib.load("scaler.pkl")
 # Initialize Flask app
 app = Flask(__name__, template_folder='templates')
 
-# Route to render the HTML page
-@app.route('/')
+# Route to render the HTML page and css file
+@app.route('/index')
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/blogs')
+def blogs():
+    return render_template('blogs.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('Contacts.html')
+
+@app.route('/styles')
+def styles():
+    return app.send_static_file("styles.css")
+
+@app.route('/images/Mohanish.png')
+def get_image(filename):
+    return app.send_static_file(f'images/{filename}')
+
+
+
 
 # API route for predicting stress from single input
 @app.route('/predict', methods=['POST'])
@@ -40,8 +63,14 @@ def predict():
 
     return jsonify({"stress_level": int(prediction[0])})
 
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=10000)
 
+    
 
+
+
+git add . git commit -m "Added all files for Flask Stress Detection Project" && git push origin main
 
