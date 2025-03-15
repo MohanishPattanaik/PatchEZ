@@ -11,11 +11,9 @@ app = Flask(__name__, template_folder='templates')
 
 # Route to render the HTML page and css file
 
-@app.route('/')
-def home():
-    return "PatchEZ Flask App is Live 🚀"
 
-@app.route('/index')
+
+@app.route('/')
 def index():
     return render_template('index.html')
 
